@@ -21,7 +21,7 @@ connectDB();
 const app = express();
 const httpServer = createServer(app);
 
-app.use(bodyParser.json({ limit: "1000mb" })); // Adjust the limit as needed
+app.use(bodyParser.json({ limit: "1000mb" })); 
 app.use(bodyParser.urlencoded({ limit: "1000mb", extended: true }));
 
 app.use(express.json());
@@ -42,26 +42,26 @@ const io = new Server(httpServer, {
 });
 
 io.on("connection", (socket) => {
-  console.log("New user connected with ID:", socket.id);
+ 
 
-  // Join a specific room
+ 
   socket.on("join", (roomId) => {
     console.log(`User joined room: ${roomId}`);
     socket.join(roomId); // Join the specified room
   });
 
-  // Handle private messages
+
   socket.on("privateMsg", (data) => {
     const { content, sender, receiver } = data;
-    const roomId = [sender, receiver].sort().join("-"); // Generate a consistent room ID
+    const roomId = [sender, receiver].sort().join("-"); 
 
     console.log(`Message from ${sender} to ${receiver} in room ${roomId}: ${content}`);
 
-    // Emit the message to the specific room
+    
     io.to(roomId).emit("newMsg", { content, sender });
   });
 
-  // Disconnect event
+
   socket.on("disconnect", () => {
     console.log(`User disconnected: ${socket.id}`);
   });
