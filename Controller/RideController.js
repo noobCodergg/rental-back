@@ -102,10 +102,10 @@ exports.updateRideStatus = async (req, res) => {
 };
 
 exports.postScedule = async (req, res) => {
-  const { driverId, userId, time, rideStatus } = req.body;
-
+  const { driverId, userId, time, route, rideStatus } = req.body;
+ console.log(route)
   try {
-    await TimeModel.create({ driverId, userId, time, rideStatus });
+    await TimeModel.create({ driverId, userId, time, route, rideStatus });
     res.status(200).json("Success");
   } catch (error) {
     res.status(500).json("failed");

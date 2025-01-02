@@ -4,6 +4,7 @@ const timeSchema = new mongoose.Schema({
   driverId: String,
   userId:String,
   time:String,
+  route:String,
   rideStatus:Boolean
 });
 
